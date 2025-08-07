@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="9" passed="9" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-08-07T16:52:38 IST" name="MakeMyTrip_BusBooking_Suite" finished-at="2025-08-07T16:53:16 IST" duration-ms="38064">
+    <groups>
+    </groups>
+    <test started-at="2025-08-07T16:52:38 IST" name="Bus Booking Tests" finished-at="2025-08-07T16:53:16 IST" duration-ms="38064">
+      <class name="tests.BusBookingTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:32 IST" name="setUp" finished-at="2025-08-07T16:52:38 IST" duration-ms="6403" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="setupBusBooking(java.util.Map)[pri:1, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:43 IST" name="setupBusBooking" data-provider="getBusBookingData" finished-at="2025-08-07T16:52:50 IST" duration-ms="6359" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{toCity=Salem, Tamil Nadu, travelDate=Aug 22 2025, fromCity=Chennai, Tamil Nadu}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setupBusBooking -->
+        <test-method signature="verifyBusTitleHeading()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:50 IST" name="verifyBusTitleHeading" finished-at="2025-08-07T16:52:51 IST" depends-on-methods="tests.BusBookingTest.setupBusBooking" duration-ms="1592" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyBusTitleHeading -->
+        <test-method signature="clickSelectSeatsButton()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:51 IST" name="clickSelectSeatsButton" finished-at="2025-08-07T16:52:52 IST" depends-on-methods="tests.BusBookingTest.verifyBusTitleHeading" duration-ms="444" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clickSelectSeatsButton -->
+        <test-method signature="selectAvailableSeat()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:52 IST" name="selectAvailableSeat" finished-at="2025-08-07T16:52:53 IST" depends-on-methods="tests.BusBookingTest.clickSelectSeatsButton" duration-ms="1766" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- selectAvailableSeat -->
+        <test-method signature="selectBoardingPoint()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:53 IST" name="selectBoardingPoint" finished-at="2025-08-07T16:52:54 IST" depends-on-methods="tests.BusBookingTest.selectAvailableSeat" duration-ms="290" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- selectBoardingPoint -->
+        <test-method signature="selectDroppingPoint()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:54 IST" name="selectDroppingPoint" finished-at="2025-08-07T16:52:54 IST" depends-on-methods="tests.BusBookingTest.selectBoardingPoint" duration-ms="189" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- selectDroppingPoint -->
+        <test-method signature="clickContinueButton()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:54 IST" name="clickContinueButton" finished-at="2025-08-07T16:53:04 IST" depends-on-methods="tests.BusBookingTest.selectDroppingPoint" duration-ms="9601" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clickContinueButton -->
+        <test-method signature="fillCompleteBookingDetails()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:53:04 IST" name="fillCompleteBookingDetails" finished-at="2025-08-07T16:53:06 IST" depends-on-methods="tests.BusBookingTest.clickContinueButton" duration-ms="2072" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fillCompleteBookingDetails -->
+        <test-method signature="verifyPaymentDetails()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:53:06 IST" name="verifyPaymentDetails" finished-at="2025-08-07T16:53:16 IST" depends-on-methods="tests.BusBookingTest.fillCompleteBookingDetails" duration-ms="10600" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyPaymentDetails -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:53:18 IST" name="tearDown" finished-at="2025-08-07T16:53:19 IST" duration-ms="1234" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.BusBookingTest -->
+    </test> <!-- Bus Booking Tests -->
+  </suite> <!-- MakeMyTrip_BusBooking_Suite -->
+</testng-results>
