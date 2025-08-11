@@ -10,56 +10,43 @@ import enums.BrowserType;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
- * DriverManager handles the WebDriver lifecycle using ThreadLocal for parallel test execution support.
- * Ensures one driver instance per thread and browser type support (Chrome, Edge).
+ * Manages WebDriver lifecycle using ThreadLocal (safe for parallel tests).
  */
 public final class DriverManager {
 
-    // ThreadLocal ensures thread-safe WebDriver instances during parallel execution
+    // Holds one WebDriver instance per thread (parallel-safe)
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    // Private constructor to prevent object creation
-    private DriverManager() {
-    }
+    // Prevent object creation
+    private DriverManager() {}
 
     /**
-     * Initializes the WebDriver based on the specified browser type.
-     * Supports Chrome and Edge (can be extended to others).
-     *
-     * @param browser BrowserType enum value (CHROME or EDGE)
+     * Starts WebDriver for the given browser type.
      */
     public static void initDriver(BrowserType browser) {
-        if (driver.get() == null) {
+        if (driver.get() == null) { // Only create if not already started
             switch (browser) {
                 case CHROME:
-                    WebDriverManager.chromedriver().setup();
-                    ChromeOptions chromeOptions = new ChromeOptions();
-                    driver.set(new ChromeDriver(chromeOptions));
+                    WebDriverManager.chromedriver().setup(); // Auto-setup ChromeDriver
+                    driver.set(new ChromeDriver(new ChromeOptions())); // Launch Chrome
                     break;
 
                 case EDGE:
-                    WebDriverManager.edgedriver().setup();
-                    EdgeOptions edgeOptions = new EdgeOptions();
-                    driver.set(new EdgeDriver(edgeOptions));
+                    WebDriverManager.edgedriver().setup(); // Auto-setup EdgeDriver
+                    driver.set(new EdgeDriver(new EdgeOptions())); // Launch Edge
                     break;
 
                 default:
-                    throw new IllegalStateException("❌ Unexpected browser type: " + browser);
+                    throw new IllegalStateException("❌ Unsupported browser: " + browser);
             }
 
-            // Maximize browser window to ensure consistency in UI layout
-            getDriver().manage().window().maximize();
-            
-         // ✅ Add Implicit Wait
-            getDriver().manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
+            getDriver().manage().window().maximize(); // Fullscreen for consistency
+            getDriver().manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10)); // Basic implicit wait
         }
     }
 
     /**
-     * Returns the WebDriver instance associated with the current thread.
-     * Throws an exception if the driver is not initialized.
-     *
-     * @return WebDriver instance for the current thread
+     * Gets WebDriver for current thread.
      */
     public static WebDriver getDriver() {
         if (driver.get() == null) {
@@ -69,13 +56,12 @@ public final class DriverManager {
     }
 
     /**
-     * Quits the browser and cleans up the ThreadLocal driver instance.
-     * Always call this at the end of test execution to avoid memory leaks.
+     * Closes browser and clears ThreadLocal instance.
      */
     public static void quitDriver() {
         if (driver.get() != null) {
-            driver.get().quit();
-            driver.remove(); // Remove reference to ensure clean memory
+            driver.get().quit();   // Close browser
+            driver.remove();       // Remove driver from ThreadLocal
         }
     }
 }

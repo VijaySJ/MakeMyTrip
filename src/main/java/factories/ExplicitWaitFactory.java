@@ -13,50 +13,43 @@ import driver.DriverManager;
 import enums.WaitStrategy;
 
 /**
- * This factory class centralizes all explicit wait logic
- * based on the defined WaitStrategy enum.
- * 
- * It helps keep the test code clean and consistent by applying
- * the right wait condition before interacting with web elements.
+ * Central place for handling different explicit wait strategies before returning a WebElement.
  */
 public final class ExplicitWaitFactory {
 
-    // Private constructor to prevent instantiation
+    // Prevent creating objects of this utility class
     private ExplicitWaitFactory() {}
 
     /**
-     * Applies the appropriate WebDriver explicit wait strategy
-     * before returning the WebElement for interaction.
+     * Waits for the element using the given wait strategy and returns it.
      *
-     * @param waitStrategy The strategy to apply (CLICKABLE, VISIBLE, etc.)
-     * @param locator The locator of the target element
-     * @return The WebElement after the wait condition is satisfied
+     * @param waitStrategy strategy like CLICKABLE / VISIBLE / PRESENCE / NONE
+     * @param locator element locator
+     * @return WebElement after applying the wait
      */
     public static WebElement performExplicitWait(WaitStrategy waitStrategy, By locator) {
+        // Get current driver
         WebDriver driver = DriverManager.getDriver();
 
-        // Create WebDriverWait with configurable wait time
+        // Create wait object with default timeout from constants
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.getExplicitWait()));
 
+        // Pick wait type based on enum value
         switch (waitStrategy) {
             case CLICKABLE:
-                // Waits until the element is visible and enabled
-                return wait.until(ExpectedConditions.elementToBeClickable(locator));
+                return wait.until(ExpectedConditions.elementToBeClickable(locator)); // visible & enabled
 
             case VISIBLE:
-                // Waits until the element is visible in the DOM
-                return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+                return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)); // only visible
 
             case PRESENCE:
-                // Waits until the element is present in the DOM (not necessarily visible)
-                return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+                return wait.until(ExpectedConditions.presenceOfElementLocated(locator)); // in DOM, not always visible
 
             case NONE:
-                // No wait applied; element is fetched directly
-                return driver.findElement(locator);
+                return driver.findElement(locator); // no wait at all
 
             default:
-                throw new IllegalStateException("❌ Unexpected WaitStrategy: " + waitStrategy);
+                throw new IllegalStateException("❌ Unknown WaitStrategy: " + waitStrategy);
         }
     }
 }

@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>6/1/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>4/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Thu Aug 07 08:56:36 IST 2025</td>
+<td>Started on:</td><td>Mon Aug 11 02:09:37 IST 2025</td>
 </tr>
-<tr><td>Total time:</td><td>11 seconds (11970 ms)</td>
+<tr><td>Total time:</td><td>231 seconds (231862 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,12 +76,19 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='tests.BusBookingTest.isContinueEnabled()'><b>isContinueEnabled</b><br>Test class: tests.BusBookingTest</td>
-<td><div><pre>java.lang.AssertionError: ❌ Continue button is NOT enabled after selecting boarding and dropping points! expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1590)
-	at org.testng.Assert.assertTrue(Assert.java:57)
-	at tests.BusBookingTest.isContinueEnabled(BusBookingTest.java:69)
+<td title='tests.BusBookingTest.busTicketBookingFlow()'><b>busTicketBookingFlow</b><br>Test class: tests.BusBookingTest<br>Parameters: {MobileNumber=7395950626, Email=swathi@gmail.com, travelDate=Aug 30 2025, State=Tamil Nadu, toCity=Thiruvarur, Tamil Nadu, Gender=Female, fromCity=Chennai, Tamil Nadu, Age=29, Scenario=From Chennai to Thiruvarur, Name=Swathi}</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //div[@class=&apos;displayContents&apos;]/child::div[.=&apos;Scan to Pay&apos;] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.21.0&apos;, revision: &apos;79ed462ef4&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.185, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58806}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58806/devtoo..., se:cdpVersion: 138.0.7204.185, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 969dfc26053bed46b2d9551bd7dd944d
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at factories.ExplicitWaitFactory.performExplicitWait(ExplicitWaitFactory.java:43)
+	at pages.BasePage.getText(BasePage.java:59)
+	at pages.PaymentPage.getScanToPayHeaderText(PaymentPage.java:20)
+	at tests.BusBookingTest.busTicketBookingFlow(BusBookingTest.java:68)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
@@ -108,12 +115,19 @@ function toggleAllBoxes() {
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1892062598", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1892062598'><pre>java.lang.AssertionError: ❌ Continue button is NOT enabled after selecting boarding and dropping points! expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:111)
-	at org.testng.Assert.failNotEquals(Assert.java:1590)
-	at org.testng.Assert.assertTrue(Assert.java:57)
-	at tests.BusBookingTest.isContinueEnabled(BusBookingTest.java:69)
+</pre></div><a href='#' onClick='toggleBox("stack-trace511507785", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace511507785'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //div[@class=&apos;displayContents&apos;]/child::div[.=&apos;Scan to Pay&apos;] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.21.0&apos;, revision: &apos;79ed462ef4&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.6&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 138.0.7204.185, chrome: {chromedriverVersion: 138.0.7204.183 (e90faf484dd..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58806}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58806/devtoo..., se:cdpVersion: 138.0.7204.185, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 969dfc26053bed46b2d9551bd7dd944d
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at factories.ExplicitWaitFactory.performExplicitWait(ExplicitWaitFactory.java:43)
+	at pages.BasePage.getText(BasePage.java:59)
+	at pages.PaymentPage.getScanToPayHeaderText(PaymentPage.java:20)
+	at tests.BusBookingTest.busTicketBookingFlow(BusBookingTest.java:68)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
@@ -141,8 +155,8 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
 </pre></div></td>
-<td>3</td>
-<td>tests.BusBookingTest@7bedc48a</td></tr>
+<td>54</td>
+<td>tests.BusBookingTest@77c2494c</td></tr>
 </table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
@@ -153,35 +167,25 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='tests.BusBookingTest.setupBusBooking()'><b>setupBusBooking</b><br>Test class: tests.BusBookingTest<br>Parameters: {toCity=Salem, Tamil Nadu, travelDate=Aug 10 2025, fromCity=Chennai, Tamil Nadu}</td>
+<td title='tests.BusBookingTest.busTicketBookingFlow()'><b>busTicketBookingFlow</b><br>Test class: tests.BusBookingTest<br>Parameters: {MobileNumber=7395950624, Email=manimegalai@gmail.com, travelDate=Aug 26 2025, State=Tamil Nadu, toCity=Karur, Tamil Nadu, Gender=Female, fromCity=Chennai, Tamil Nadu, Age=33, Scenario=From Chennai to Karur, Name=Manimegalai}</td>
 <td></td>
-<td>5</td>
-<td>tests.BusBookingTest@7bedc48a</td></tr>
+<td>39</td>
+<td>tests.BusBookingTest@77c2494c</td></tr>
 <tr>
-<td title='tests.BusBookingTest.clickSelectSeatsButton()'><b>clickSelectSeatsButton</b><br>Test class: tests.BusBookingTest</td>
+<td title='tests.BusBookingTest.busTicketBookingFlow()'><b>busTicketBookingFlow</b><br>Test class: tests.BusBookingTest<br>Parameters: {MobileNumber=7395950623, Email=ajayrajendran@gmail.com, travelDate=Aug 24 2025, State=Tamil Nadu, toCity=Karaikal, Tamil Nadu, Gender=Male, fromCity=Chennai, Tamil Nadu, Age=27, Scenario=From Chennai to Mayiladuthurai, Name=Ajay}</td>
 <td></td>
-<td>0</td>
-<td>tests.BusBookingTest@7bedc48a</td></tr>
+<td>52</td>
+<td>tests.BusBookingTest@77c2494c</td></tr>
 <tr>
-<td title='tests.BusBookingTest.selectBoardingPoint()'><b>selectBoardingPoint</b><br>Test class: tests.BusBookingTest</td>
+<td title='tests.BusBookingTest.busTicketBookingFlow()'><b>busTicketBookingFlow</b><br>Test class: tests.BusBookingTest<br>Parameters: {MobileNumber=9994050623, Email=vijaysjofficial@gmail.com, travelDate=Aug 22 2025, State=Tamil Nadu, toCity=Chidambaram, Tamil Nadu, Gender=Male, fromCity=Chennai, Tamil Nadu, Age=27, Scenario=From Chennai to Chidambaram, Name=Vijay}</td>
 <td></td>
-<td>0</td>
-<td>tests.BusBookingTest@7bedc48a</td></tr>
+<td>41</td>
+<td>tests.BusBookingTest@77c2494c</td></tr>
 <tr>
-<td title='tests.BusBookingTest.verifyBusTitleHeading()'><b>verifyBusTitleHeading</b><br>Test class: tests.BusBookingTest</td>
+<td title='tests.BusBookingTest.busTicketBookingFlow()'><b>busTicketBookingFlow</b><br>Test class: tests.BusBookingTest<br>Parameters: {MobileNumber=7395950625, Email=vidhyadevi@gmail.com, travelDate=Aug 28 2025, State=Tamil Nadu, toCity=Salem, Tamil Nadu, Gender=Female, fromCity=Chennai, Tamil Nadu, Age=29, Scenario=From Chennai to Salem, Name=Vidhya}</td>
 <td></td>
-<td>0</td>
-<td>tests.BusBookingTest@7bedc48a</td></tr>
-<tr>
-<td title='tests.BusBookingTest.selectAvailableSeat()'><b>selectAvailableSeat</b><br>Test class: tests.BusBookingTest</td>
-<td></td>
-<td>0</td>
-<td>tests.BusBookingTest@7bedc48a</td></tr>
-<tr>
-<td title='tests.BusBookingTest.selectDroppingPoint()'><b>selectDroppingPoint</b><br>Test class: tests.BusBookingTest</td>
-<td></td>
-<td>0</td>
-<td>tests.BusBookingTest@7bedc48a</td></tr>
+<td>26</td>
+<td>tests.BusBookingTest@77c2494c</td></tr>
 </table><p>
 </body>
 </html>

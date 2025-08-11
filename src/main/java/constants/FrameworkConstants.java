@@ -1,58 +1,53 @@
 package constants;
 
 /**
- * Central class to store all framework-wide constant values.
- * Avoids hardcoding values in test or utility classes.
+ * Holds constant values used across the whole test framework.
  */
 public final class FrameworkConstants {
 
-    // Private constructor to prevent instantiation
+    // Prevents anyone from creating an object of this class
     private FrameworkConstants() {}
 
-    // Path to the main resource folder
+    /** Path to the resources folder */
     private static final String RESOURCE_PATH = System.getProperty("user.dir") + "/src/test/resources";
 
-    // Path to the config.properties file
+    /** Path to the config.properties file */
     private static final String CONFIGFILE_PATH = RESOURCE_PATH + "/config/config.properties";
 
-    // Path to Excel file containing test data
+    /** Path to the test data Excel file */
     private static final String EXCEL_PATH = RESOURCE_PATH + "/testdata/BusBookingData.xlsx";
 
-    // Path where the Extent report will be generated
+    /** Where the Extent test report will be saved */
     private static final String EXTENT_REPORT_PATH = RESOURCE_PATH + "/report.html";
+    
+ // Folder for screenshots inside the project directory
+    private static final String SCREENSHOT_PATH = RESOURCE_PATH + "/screenshots/";
 
-    // Default explicit wait time (in seconds) used across the framework
+    /** Default wait time (in seconds) for WebDriver explicit waits */
     private static final int EXPLICIT_WAIT = 20;
 
-    /**
-     * Returns the path to the configuration file.
-     * Used wherever we load config.properties.
-     */
+    // Returns path to the config file
     public static String getConfigFilePath() {
         return CONFIGFILE_PATH;
     }
 
-    /**
-     * Returns the explicit wait time in seconds.
-     * This is used by WebDriverWait (centralized wait).
-     */
+    // Returns the default explicit wait time for WebDriverWait
     public static int getExplicitWait() {
         return EXPLICIT_WAIT;
     }
 
-    /**
-     * Returns the full path to the Excel file.
-     * This is the file we use for data-driven testing.
-     */
+    // Returns path to Excel data file
     public static String getExcelFilePath() {
         return EXCEL_PATH;
     }
 
-    /**
-     * Returns the path where the Extent report will be saved.
-     * Used during report generation.
-     */
+    // Returns path to test report file
     public static String getExtentReportPath() {
         return EXTENT_REPORT_PATH;
+    }
+    
+    // Returns path to screenshot file
+    public static String getScreenshotPath() {
+        return SCREENSHOT_PATH;
     }
 }

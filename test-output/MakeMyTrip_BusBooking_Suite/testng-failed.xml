@@ -5,23 +5,15 @@
   <listeners>
     <listener class-name="listeners.TestListener"/>
   </listeners>
-  <test thread-count="5" name="Bus Booking Tests(failed)">
+  <test thread-count="5" name="Bus Booking Flow(failed)">
     <classes>
       <class name="tests.BusBookingTest">
         <methods>
-          <include name="selectDroppingPoint"/>
-          <include name="selectBoardingPoint"/>
-          <include name="fillCompleteBookingDetails"/>
-          <include name="verifyBusTitleHeading"/>
-          <include name="clickSelectSeatsButton"/>
-          <include name="verifyPaymentDetails"/>
-          <include name="selectAvailableSeat"/>
-          <include name="setupBusBooking" invocation-numbers="0"/>
-          <include name="clickContinueButton"/>
           <include name="tearDown"/>
+          <include name="busTicketBookingFlow" invocation-numbers="4"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- tests.BusBookingTest -->
     </classes>
-  </test> <!-- Bus Booking Tests(failed) -->
+  </test> <!-- Bus Booking Flow(failed) -->
 </suite> <!-- Failed suite [MakeMyTrip_BusBooking_Suite] -->

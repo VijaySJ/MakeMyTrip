@@ -50,8 +50,8 @@ C:\YourName\MakeMyTripBusBookingFramework\
 
 7. **pages/**
    - `BasePage.java`: Common methods for all page classes
-   - `HomePage.java`: Handles origin/destination/date selection
-   - `BusSearchResultsPage.java`: Selects bus, time, seat
+   - `BusBookingPage.java`: Handles origin/destination/date selection
+   - `BusResultsPage.java`: Selects bus, time, seat
    - `CompleteBookingPage.java`: Enters passenger details
    - `PaymentPage.java`: Navigates to the payment page
 
@@ -92,7 +92,7 @@ C:\YourName\MakeMyTripBusBookingFramework\
 ==================================================================
 💡 TESTING FEATURES:
 ==================================================================
-✔️ Bus booking flow automated end-to-end  
+✔️ Bus booking flow automated
 ✔️ POM structure for scalable maintenance  
 ✔️ Data-driven testing from Excel  
 ✔️ Parameterization via TestNG XML  

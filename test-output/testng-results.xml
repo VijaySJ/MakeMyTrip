@@ -1,64 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="9" passed="9" failed="0" skipped="0">
+<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-08-07T16:52:38 IST" name="MakeMyTrip_BusBooking_Suite" finished-at="2025-08-07T16:53:16 IST" duration-ms="38064">
+  <suite started-at="2025-08-11T13:07:43 IST" name="MakeMyTrip_BusBooking_Suite" finished-at="2025-08-11T13:11:56 IST" duration-ms="253261">
     <groups>
     </groups>
-    <test started-at="2025-08-07T16:52:38 IST" name="Bus Booking Tests" finished-at="2025-08-07T16:53:16 IST" duration-ms="38064">
+    <test started-at="2025-08-11T13:07:43 IST" name="Bus Booking Flow" finished-at="2025-08-11T13:11:56 IST" duration-ms="253261">
       <class name="tests.BusBookingTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:32 IST" name="setUp" finished-at="2025-08-07T16:52:38 IST" duration-ms="6403" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:07:45 IST" name="setUp" finished-at="2025-08-11T13:07:49 IST" duration-ms="4093" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="setupBusBooking(java.util.Map)[pri:1, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:43 IST" name="setupBusBooking" data-provider="getBusBookingData" finished-at="2025-08-07T16:52:50 IST" duration-ms="6359" status="PASS">
+        <test-method signature="busTicketBookingFlow(java.util.Map)[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:07:49 IST" name="busTicketBookingFlow" data-provider="BusBooking" finished-at="2025-08-11T13:08:33 IST" duration-ms="44330" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[{toCity=Salem, Tamil Nadu, travelDate=Aug 22 2025, fromCity=Chennai, Tamil Nadu}]]>
+                <![CDATA[{MobileNumber=9994050623, Email=vijaysjofficial@gmail.com, travelDate=Aug 22 2025, State=Tamil Nadu, toCity=Chidambaram, Tamil Nadu, Gender=Male, fromCity=Chennai, Tamil Nadu, Age=27, Scenario=From Chennai to Chidambaram, Name=Vijay}]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setupBusBooking -->
-        <test-method signature="verifyBusTitleHeading()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:50 IST" name="verifyBusTitleHeading" finished-at="2025-08-07T16:52:51 IST" depends-on-methods="tests.BusBookingTest.setupBusBooking" duration-ms="1592" status="PASS">
+        </test-method> <!-- busTicketBookingFlow -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:08:33 IST" name="tearDown" finished-at="2025-08-11T13:08:34 IST" duration-ms="536" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyBusTitleHeading -->
-        <test-method signature="clickSelectSeatsButton()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:51 IST" name="clickSelectSeatsButton" finished-at="2025-08-07T16:52:52 IST" depends-on-methods="tests.BusBookingTest.verifyBusTitleHeading" duration-ms="444" status="PASS">
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:08:34 IST" name="setUp" finished-at="2025-08-11T13:08:37 IST" duration-ms="2757" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- clickSelectSeatsButton -->
-        <test-method signature="selectAvailableSeat()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:52 IST" name="selectAvailableSeat" finished-at="2025-08-07T16:52:53 IST" depends-on-methods="tests.BusBookingTest.clickSelectSeatsButton" duration-ms="1766" status="PASS">
+        </test-method> <!-- setUp -->
+        <test-method signature="busTicketBookingFlow(java.util.Map)[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:08:37 IST" name="busTicketBookingFlow" data-provider="BusBooking" finished-at="2025-08-11T13:09:25 IST" duration-ms="48194" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{MobileNumber=7395950623, Email=ajayrajendran@gmail.com, travelDate=Aug 24 2025, State=Tamil Nadu, toCity=Karaikal, Tamil Nadu, Gender=Male, fromCity=Chennai, Tamil Nadu, Age=27, Scenario=From Chennai to Mayiladuthurai, Name=Ajay}]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- selectAvailableSeat -->
-        <test-method signature="selectBoardingPoint()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:53 IST" name="selectBoardingPoint" finished-at="2025-08-07T16:52:54 IST" depends-on-methods="tests.BusBookingTest.selectAvailableSeat" duration-ms="290" status="PASS">
+        </test-method> <!-- busTicketBookingFlow -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:09:25 IST" name="tearDown" finished-at="2025-08-11T13:09:25 IST" duration-ms="481" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- selectBoardingPoint -->
-        <test-method signature="selectDroppingPoint()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:54 IST" name="selectDroppingPoint" finished-at="2025-08-07T16:52:54 IST" depends-on-methods="tests.BusBookingTest.selectBoardingPoint" duration-ms="189" status="PASS">
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:09:25 IST" name="setUp" finished-at="2025-08-11T13:09:28 IST" duration-ms="2693" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- selectDroppingPoint -->
-        <test-method signature="clickContinueButton()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:52:54 IST" name="clickContinueButton" finished-at="2025-08-07T16:53:04 IST" depends-on-methods="tests.BusBookingTest.selectDroppingPoint" duration-ms="9601" status="PASS">
+        </test-method> <!-- setUp -->
+        <test-method signature="busTicketBookingFlow(java.util.Map)[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:09:28 IST" name="busTicketBookingFlow" data-provider="BusBooking" finished-at="2025-08-11T13:10:14 IST" duration-ms="45977" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{MobileNumber=7395950624, Email=manimegalai@gmail.com, travelDate=Aug 26 2025, State=Tamil Nadu, toCity=Karur, Tamil Nadu, Gender=Female, fromCity=Chennai, Tamil Nadu, Age=33, Scenario=From Chennai to Karur, Name=Manimegalai}]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- clickContinueButton -->
-        <test-method signature="fillCompleteBookingDetails()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:53:04 IST" name="fillCompleteBookingDetails" finished-at="2025-08-07T16:53:06 IST" depends-on-methods="tests.BusBookingTest.clickContinueButton" duration-ms="2072" status="PASS">
+        </test-method> <!-- busTicketBookingFlow -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:10:14 IST" name="tearDown" finished-at="2025-08-11T13:10:15 IST" duration-ms="498" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- fillCompleteBookingDetails -->
-        <test-method signature="verifyPaymentDetails()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:53:06 IST" name="verifyPaymentDetails" finished-at="2025-08-07T16:53:16 IST" depends-on-methods="tests.BusBookingTest.fillCompleteBookingDetails" duration-ms="10600" status="PASS">
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:10:15 IST" name="setUp" finished-at="2025-08-11T13:10:17 IST" duration-ms="2764" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyPaymentDetails -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.BusBookingTest@23348b5d]" started-at="2025-08-07T16:53:18 IST" name="tearDown" finished-at="2025-08-07T16:53:19 IST" duration-ms="1234" status="PASS">
+        </test-method> <!-- setUp -->
+        <test-method signature="busTicketBookingFlow(java.util.Map)[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:10:17 IST" name="busTicketBookingFlow" data-provider="BusBooking" finished-at="2025-08-11T13:11:06 IST" duration-ms="48470" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{MobileNumber=7395950625, Email=vidhyadevi@gmail.com, travelDate=Aug 28 2025, State=Tamil Nadu, toCity=Salem, Tamil Nadu, Gender=Female, fromCity=Chennai, Tamil Nadu, Age=29, Scenario=From Chennai to Salem, Name=Vidhya}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- busTicketBookingFlow -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:11:06 IST" name="tearDown" finished-at="2025-08-11T13:11:06 IST" duration-ms="518" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:11:06 IST" name="setUp" finished-at="2025-08-11T13:11:11 IST" duration-ms="4585" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="busTicketBookingFlow(java.util.Map)[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:11:11 IST" name="busTicketBookingFlow" data-provider="BusBooking" finished-at="2025-08-11T13:11:56 IST" duration-ms="44947" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{MobileNumber=7395950626, Email=swathi@gmail.com, travelDate=Aug 30 2025, State=Tamil Nadu, toCity=Thiruvarur, Tamil Nadu, Gender=Female, fromCity=Chennai, Tamil Nadu, Age=29, Scenario=From Chennai to Thiruvarur, Name=Swathi}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- busTicketBookingFlow -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.BusBookingTest@233795b6]" started-at="2025-08-11T13:11:56 IST" name="tearDown" finished-at="2025-08-11T13:11:56 IST" duration-ms="535" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- tests.BusBookingTest -->
-    </test> <!-- Bus Booking Tests -->
+    </test> <!-- Bus Booking Flow -->
   </suite> <!-- MakeMyTrip_BusBooking_Suite -->
 </testng-results>

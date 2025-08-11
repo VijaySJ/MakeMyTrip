@@ -5,14 +5,8 @@
     <classes>
       <class name="tests.BusBookingTest">
         <methods>
-          <include name="selectDroppingPoint"/>
-          <include name="selectBoardingPoint"/>
-          <include name="verifyBusTitleHeading"/>
-          <include name="setupBusBooking"/>
-          <include name="clickSelectSeatsButton"/>
-          <include name="selectAvailableSeat"/>
-          <include name="isContinueEnabled"/>
           <include name="tearDown"/>
+          <include name="busTicketBookingFlow" invocation-numbers="4"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- tests.BusBookingTest -->

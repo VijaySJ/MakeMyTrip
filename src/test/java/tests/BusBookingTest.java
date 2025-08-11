@@ -8,91 +8,72 @@ import org.testng.annotations.Test;
 import dataProviders.ExcelDataProvider;
 import enums.SeatType;
 import pages.BusBookingPage;
-import pages.BusSearchResultsPage;
+import pages.BusResultsPage;
 import pages.CompleteBookingPage;
 import pages.PaymentPage;
+import reports.ExtentLogger;  // ✅ Import the logger
 
-public class BusBookingTest extends BaseTest {
+public final class BusBookingTest extends BaseTest {
 
-	private BusSearchResultsPage resultsPage;
-	private CompleteBookingPage completeBooking;
-	private PaymentPage payment;
-	private String fromCity, toCity, travelDate;
+    @Test(dataProvider = "BusBooking", dataProviderClass = ExcelDataProvider.class)
+    public void busTicketBookingFlow(Map<String, String> data) {
 
-	@Test(priority = 1, dataProvider = "getBusBookingData", dataProviderClass = ExcelDataProvider.class)
-	public void setupBusBooking(Map<String, String> testData) {
-		fromCity = testData.get("fromCity");
-		toCity = testData.get("toCity");
-		travelDate = testData.get("travelDate");
+        ExtentLogger.info("<=== Starting scenario: " + data.get("Scenario") + " ===>");
 
-		resultsPage = new BusBookingPage().closeInitialPopups().clickBusesTab().enterFromCity(fromCity)
-				.enterToCity(toCity).selectTravelDateByAriaLabel(travelDate).clickSearch();
-	}
+        // ===== Step 1: Bus search =====
+        ExtentLogger.info("Searching bus from " + data.get("fromCity") + " to " + data.get("toCity"));
+        BusResultsPage resultsPage = new BusBookingPage()
+            .closeInitialPopups()
+            .clickBusesTab()
+            .enterFromCity(data.get("fromCity"))
+            .enterToCity(data.get("toCity"))
+            .selectTravelDateByAriaLabel(data.get("travelDate"))
+            .clickSearch();
+        ExtentLogger.pass("Bus search completed");
 
-	@Test(dependsOnMethods = "setupBusBooking")
-	public void verifyBusTitleHeading() {
-		String expectedTitle = fromCity + " to " + toCity + " Bus";
-		String actualTitle = resultsPage.getBusRouteTitle();
-		Assert.assertEquals(actualTitle, expectedTitle, "❌ Bus route title mismatch!");
-	}
+        // ===== Step 2: Select bus, seats & boarding/dropping points =====
+        String expectedRoute = data.get("fromCity") + " to " + data.get("toCity") + " Bus";
+        String busesCount = resultsPage.getBusesCountText();
+        ExtentLogger.info("Buses Count: "+busesCount);
+        Assert.assertEquals(resultsPage.getBusRouteTitle(), expectedRoute, "Route title mismatch");
+        ExtentLogger.info("Verified search results route title: "+resultsPage.getBusRouteTitle());
 
-	@Test(dependsOnMethods = "verifyBusTitleHeading")
-	public void clickSelectSeatsButton() {
-		resultsPage.clickSelectSeatsButtonByIndex(1);
-	}
+        resultsPage
+            .clickSelectSeatsButtonByIndex(1)
+            .selectAvailableSeats(SeatType.SEATER, 1)
+            .selectBoardingPointByIndex(1)
+            .selectDroppingPointByIndex(1);
 
-	@Test(dependsOnMethods = "clickSelectSeatsButton")
-	public void selectAvailableSeat() throws InterruptedException {
-		//Thread.sleep(5000);
-		resultsPage.selectAvailableSeats(SeatType.SEATER, 1);
-	}
+        Assert.assertTrue(resultsPage.waitUntilContinueButtonIsEnabled(), "Continue button not enabled");
+        resultsPage.clickContinueButton();
+        ExtentLogger.pass("Seat selection and boarding/dropping points completed");
 
-	@Test(dependsOnMethods = "selectAvailableSeat")
-	public void selectBoardingPoint() throws InterruptedException {
-		//Thread.sleep(5000);
-		resultsPage.selectBoardingPointByIndex(1);
-	}
+        // ===== Step 3: Passenger details =====
+        CompleteBookingPage completeBooking = new CompleteBookingPage();
+        Assert.assertEquals(completeBooking.verifyCompleteBookingHeader(), "Complete your booking");
+        ExtentLogger.info("On Complete Booking Page Header is Visible");
 
-	@Test(dependsOnMethods = "selectBoardingPoint")
-	public void selectDroppingPoint() throws InterruptedException {
-		//Thread.sleep(5000);
-		resultsPage.selectDroppingPointByIndex(1);
-	}
+        completeBooking
+            .fillTravelDetailsNameField(data.get("Name"))
+            .fillTravelDetailsAgeField(data.get("Age"))
+            .selectGender(data.get("Gender"))
+            .fillEmailId(data.get("Email"))
+            .fillMobileNumber(data.get("MobileNumber"))
+            .checkStateConfirmationCheckbox()
+            .clickContinueBtn();
 
-	@Test(dependsOnMethods = "selectDroppingPoint")
-	public void clickContinueButton() {
-		try {
-			Thread.sleep(5000); // Let the page update button status
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		boolean isEnabled = resultsPage.waitUntilContinueButtonIsEnabled();
-		resultsPage.clickContinueButton();
-		Assert.assertTrue(isEnabled, "❌ Continue button is NOT enabled after selecting boarding and dropping points!");
-	}
+        Assert.assertTrue(completeBooking.verifyPleaseWaitPopup(), "Please wait popup not displayed");
+        ExtentLogger.pass("Passenger details filled and continue pressed");
 
-	@Test(dependsOnMethods = "clickContinueButton")
-	public void fillCompleteBookingDetails() {
-		completeBooking = new CompleteBookingPage();
-		completeBooking.verifyCompleteBookingHeader();
-		completeBooking.fillTravelDetailsFirstNameField("Vijay S");
-		completeBooking.fillTravelDetailsAgeField("27");
-		completeBooking.clickGender();
-		completeBooking.fillEmailId("vijaysjofficial@gmail.com");
-		completeBooking.fillMobileNumber("9994050623");
-		completeBooking.checkStateConfirmationCheckbox();
-		//completeBooking.selectState("Tamil Nadu");
-		completeBooking.clickContinueBtn();
-		completeBooking.verifyPleaseWaitPopup();
-	}
-	
-	@Test(dependsOnMethods = "fillCompleteBookingDetails")
-	public void verifyPaymentDetails() {
-		payment = new PaymentPage();
-		payment.verifyScanToHeader();
-		payment.verifyPaymentOptions();
-		payment.vertifyTotalDue();
-		payment.verifyTotalDueAmount().contains("₹");
-	}
+        // ===== Step 4: Payment page =====
+        PaymentPage payment = new PaymentPage();
+        Assert.assertEquals(payment.getScanToPayHeaderText(), "Scan to Pay");
+        Assert.assertEquals(payment.getPaymentOptionsHeaderText(), "Payment Options");
+        Assert.assertEquals(payment.getTotalDueLabelText(), "Total Due");
+        ExtentLogger.info("Total Due Amount: "+ payment.getTotalDueAmountText());
+        Assert.assertTrue(payment.getTotalDueAmountText().contains("₹"), "Total Due amount missing currency symbol");
+        ExtentLogger.pass("Payment page verification completed successfully");
 
+        ExtentLogger.info("<=== Scenario End: " + data.get("Scenario") + " ===>");
+    }
 }

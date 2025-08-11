@@ -1,6 +1,7 @@
 package listeners;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -11,74 +12,65 @@ import com.aventstack.extentreports.ExtentTest;
 
 import reports.ExtentLogger;
 import reports.ExtentReportManager;
+import utils.ScreenshotUtils;
 
-/**
- * TestNG Listener implementation to hook into test execution lifecycle.
- * This listener is responsible for initializing and managing Extent Reports.
- */
 public class TestListener implements ITestListener {
 
     private static ExtentReports extent;
 
-    /**
-     * Called once before any test starts in the suite.
-     * We initialize the ExtentReports instance here.
-     */
     @Override
     public void onStart(ITestContext context) {
-        extent = ExtentReportManager.initReport(); // ✅ Report setup
+        extent = ExtentReportManager.initReport();
     }
 
-    /**
-     * Called when each @Test method starts.
-     * Creates a test node in the Extent report for the method.
-     */
     @Override
     public void onTestStart(ITestResult result) {
-        ExtentTest test = extent.createTest(result.getMethod().getMethodName());
-        ExtentLogger.setTest(test); // ✅ Sets current test to thread-safe logger
+        // Default test name is the method name
+        String testName = result.getMethod().getMethodName();
+
+        // If DataProvider passed a Map, try to add ScenarioName
+        if (result.getParameters().length > 0 && result.getParameters()[0] instanceof Map) {
+            @SuppressWarnings("unchecked")
+            Map<String, String> data = (Map<String, String>) result.getParameters()[0];
+            String scenario = data.get("ScenarioName");
+            if (scenario != null && !scenario.isEmpty()) {
+                testName += " - " + scenario;
+            }
+        }
+
+        ExtentTest test = extent.createTest(testName);
+        ExtentLogger.setTest(test);
     }
 
-    /**
-     * Called when a test passes.
-     * Logs a PASS status in the Extent report.
-     */
     @Override
     public void onTestSuccess(ITestResult result) {
         ExtentLogger.pass("✅ Test Passed");
-        ExtentLogger.remove(); // ✅ Clear thread-safe test instance
+        ExtentLogger.remove();
     }
 
-    /**
-     * Called when a test fails.
-     * Logs the error/exception to the Extent report.
-     */
     @Override
     public void onTestFailure(ITestResult result) {
-        ExtentLogger.fail("❌ Test Failed: " + result.getThrowable());
+        ExtentLogger.fail("❌ " + result.getThrowable());
+
+        // Capture and attach screenshot
+        String screenshotPath = ScreenshotUtils.captureScreenshot(result.getMethod().getMethodName());
+        ExtentLogger.addScreenshot(screenshotPath);
+
         ExtentLogger.remove();
     }
 
-    /**
-     * Called when a test is skipped.
-     * Logs the skip reason (if any) to the Extent report.
-     */
     @Override
     public void onTestSkipped(ITestResult result) {
-        ExtentLogger.skip("⚠️ Test Skipped: " + result.getThrowable());
+        ExtentLogger.skip("⚠️ " + result.getThrowable());
         ExtentLogger.remove();
     }
 
-    /**
-     * Called once after all tests are executed in the suite.
-     * Finalizes the report by flushing all logs to the file.
-     */
     @Override
     public void onFinish(ITestContext context) {
         try {
-            ExtentReportManager.flushReport(); // ✅ Final report write
+            ExtentReportManager.flushReport();
         } catch (IOException e) {
-            e.printStackTrace(); // ⚠️ Consider logging this to a file in real framework
+            e.printStackTrace();
         }
     }
 }

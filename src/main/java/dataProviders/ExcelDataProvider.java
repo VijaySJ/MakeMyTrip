@@ -1,36 +1,23 @@
 package dataProviders;
 
-import java.io.IOException;
-
 import org.testng.annotations.DataProvider;
-
 import utils.ExcelUtils;
 
 /**
- * This class provides test data to TestNG test methods using @DataProvider.
- * It fetches data from an Excel sheet via the ExcelUtils utility.
+ * Provides test data to TestNG tests by reading from Excel sheets.
  */
-public final class ExcelDataProvider {
-
-    // Prevent instantiation
-    private ExcelDataProvider() {}
+public class ExcelDataProvider {
 
     /**
-     * DataProvider method for supplying test data related to bus booking.
-     * Sheet name = "BusData" in the Excel file.
+     * DataProvider that returns merged data from two Excel sheets.
      *
-     * @return Object[] - Array of test data rows (as Map<String, String>)
+     * @return Object[] where each element is a single test data set (merged from both sheets)
+     * @throws Exception if Excel reading fails
      */
-    @DataProvider(name = "getBusBookingData")
-    public static Object[] provideLoginData() {
-        try {
-            // Reading test data from the Excel sheet named "BusData"
-            return ExcelUtils.getData("BusData");
-        } catch (IOException e) {
-            // Log the error and return an empty array to prevent test failure at startup
-            System.err.println("❌ Failed to read data from Excel sheet 'BusData': " + e.getMessage());
-            e.printStackTrace();
-            return new Object[0];
-        }
+    @DataProvider(name = "BusBooking", parallel = false)
+    public Object[] getFullFlowData() throws Exception {
+        // Reads 'BusData' and 'BookingData' sheets and merges each row into one data set
+        // Example: Row 1 from BusData + Row 1 from BookingData = single Map<String, String>
+        return ExcelUtils.getData("BusBookingData");
     }
 }

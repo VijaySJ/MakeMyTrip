@@ -10,35 +10,37 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import constants.FrameworkConstants;
 
+/**
+ * Utility class to manage ExtentReports setup and flushing.
+ * Handles singleton creation, configuration, and auto-opening.
+ */
 public final class ExtentReportManager {
 
-    // Singleton ExtentReports instance
+    // Singleton instance to ensure one report per run
     private static ExtentReports extent;
 
-    // Private constructor to prevent instantiation
+    // Prevent object creation
     private ExtentReportManager() {}
 
     /**
-     * Initializes the ExtentReports instance if not already created.
-     * Sets up the SparkReporter, applies configurations, and attaches to ExtentReports.
-     *
-     * @return the initialized ExtentReports instance
+     * Initializes the ExtentReports instance if not already done.
+     * Sets config/theme and attaches system info.
      */
     public static ExtentReports initReport() {
         if (extent == null) {
-            // Create Spark reporter with file path
+            // Create Spark reporter and set output path
             ExtentSparkReporter spark = new ExtentSparkReporter(FrameworkConstants.getExtentReportPath());
-            
-            // Report appearance configurations
+
+            // Optional: Report appearance/theme settings
             spark.config().setTheme(Theme.STANDARD);
             spark.config().setReportName("Automation Test Report");
             spark.config().setDocumentTitle("Test Results");
 
-            // Create and attach reporter to ExtentReports
+            // Attach reporter to ExtentReports object
             extent = new ExtentReports();
             extent.attachReporter(spark);
 
-            // Add system/environment info
+            // Add environment/tester info
             extent.setSystemInfo("Tester", "Vijay");
             extent.setSystemInfo("Environment", "QA");
         }
@@ -46,25 +48,20 @@ public final class ExtentReportManager {
     }
 
     /**
-     * Flushes and writes the report to disk.
-     * Also attempts to automatically open the report in the default browser.
-     *
-     * @throws IOException if opening the report file fails
+     * Flushes report to disk and tries to auto-open in browser.
      */
     public static void flushReport() throws IOException {
         if (extent != null) {
-            extent.flush(); // Write report
-            // Auto-open report in default browser
+            extent.flush(); // Write test results to file
+            // Try opening report automatically after run
             Desktop.getDesktop().browse(new File(FrameworkConstants.getExtentReportPath()).toURI());
         }
     }
 
     /**
-     * Returns the current ExtentReports instance.
-     *
-     * @return ExtentReports instance or null if not initialized
+     * Returns current ExtentReports instance, or null if not yet initialized.
      */
-    public static ExtentReports getExtent() { 
+    public static ExtentReports getExtent() {
         return extent;
     }
 }

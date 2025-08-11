@@ -13,161 +13,123 @@ import enums.WaitStrategy;
 import factories.ExplicitWaitFactory;
 
 /**
- * BasePage class contains reusable Selenium actions used across all pages.
- * Follows Page Object Model best practices with centralized utility methods.
+ * BasePage contains common Selenium actions reused across all page classes
+ * to follow DRY principle in the Page Object Model.
  */
 public class BasePage {
 
-	/**
-	 * Clicks on a web element after applying specified wait strategy.
-	 */
-	protected void click(By locator, WaitStrategy waitStrategy) {
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
-		element.click();
-	}
+    /** Clicks an element after applying the given wait strategy */
+    protected void click(By locator, WaitStrategy waitStrategy) {
+        WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
+        element.click();
+    }
 
-	/**
-	 * Sends text input after clearing the field.
-	 * Useful for standard form fields.
-	 */
-	protected void sendKeys(By locator, String value, WaitStrategy waitStrategy) {
-		if (value == null || value.isEmpty()) {
-			throw new IllegalArgumentException("Input value cannot be null or empty");
-		}
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
-		element.clear();
-		element.sendKeys(value);
-	}
+    /** Sends text to an input after clearing it first */
+    protected void sendKeys(By locator, String value, WaitStrategy waitStrategy) {
+        if (value == null || value.isEmpty()) {
+            throw new IllegalArgumentException("Input value cannot be null or empty"); // Validation
+        }
+        WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
+        element.clear();
+        element.sendKeys(value);
+    }
 
-	/**
-	 * Sends text input without clearing the field.
-	 * Suitable for auto-suggest and city selection fields.
-	 */
-	protected void sendKeysWithoutClear(By locator, String value, WaitStrategy waitStrategy) {
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
-		element.sendKeys(value);
-	}
+    /** Sends text without clearing the field (for auto-suggest fields) */
+    protected void sendKeysWithoutClear(By locator, String value, WaitStrategy waitStrategy) {
+        ExplicitWaitFactory.performExplicitWait(waitStrategy, locator).sendKeys(value);
+    }
 
-	/**
-	 * Presses Enter key on a specific element.
-	 * Useful in search or auto-complete fields.
-	 */
-	protected void pressEnter(By locator, WaitStrategy waitStrategy) {
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
-		element.sendKeys(Keys.ENTER);
-	}
+    /** Presses ENTER key on the given element */
+    protected void pressEnter(By locator, WaitStrategy waitStrategy) {
+        ExplicitWaitFactory.performExplicitWait(waitStrategy, locator).sendKeys(Keys.ENTER);
+    }
 
-	/**
-	 * Returns the title of the current page.
-	 */
-	protected String getPageTitle() {
-		return DriverManager.getDriver().getTitle();
-	}
+    /** Returns current page title */
+    protected String getPageTitle() {
+        return DriverManager.getDriver().getTitle();
+    }
 
-	/**
-	 * Checks whether a given element is visible on the page.
-	 */
-	protected boolean isDisplayed(By locator, WaitStrategy waitStrategy) {
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
-		return element.isDisplayed();
-	}
+    /** Returns true if element is displayed */
+    protected boolean isDisplayed(By locator, WaitStrategy waitStrategy) {
+        return ExplicitWaitFactory.performExplicitWait(waitStrategy, locator).isDisplayed();
+    }
 
-	/**
-	 * Fetches text from a given element.
-	 */
-	protected String getText(By locator, WaitStrategy waitStrategy) {
-		return ExplicitWaitFactory.performExplicitWait(waitStrategy, locator).getText();
-	}
+    /** Gets visible text of an element */
+    protected String getText(By locator, WaitStrategy waitStrategy) {
+        return ExplicitWaitFactory.performExplicitWait(waitStrategy, locator).getText();
+    }
 
-	/**
-	 * Hovers mouse over the given element using Actions class.
-	 */
-	protected void hoverOverElement(By locator, WaitStrategy waitStrategy) {
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
-		Actions actions = new Actions(DriverManager.getDriver());
-		actions.moveToElement(element).perform();
-	}
+    /** Hovers mouse over an element */
+    protected void hoverOverElement(By locator, WaitStrategy waitStrategy) {
+        WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
+        new Actions(DriverManager.getDriver()).moveToElement(element).perform();
+    }
 
-	/**
-	 * Selects a dropdown value using visible text.
-	 */
-	protected void selectDropdownByText(By locator, WaitStrategy waitStrategy, String text) {
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
-		new Select(element).selectByVisibleText(text);
-	}
+    /** Select dropdown option by visible text */
+    protected void selectDropdownByText(By locator, WaitStrategy waitStrategy, String text) {
+        new Select(ExplicitWaitFactory.performExplicitWait(waitStrategy, locator)).selectByVisibleText(text);
+    }
 
-	/**
-	 * Selects a dropdown value using its value attribute.
-	 */
-	protected void selectDropdownByValue(By locator, WaitStrategy waitStrategy, String value) {
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
-		new Select(element).selectByValue(value);
-	}
+    /** Select dropdown option by value attribute */
+    protected void selectDropdownByValue(By locator, WaitStrategy waitStrategy, String value) {
+        new Select(ExplicitWaitFactory.performExplicitWait(waitStrategy, locator)).selectByValue(value);
+    }
 
-	/**
-	 * Selects a dropdown option by its index position.
-	 */
-	protected void selectDropdownByIndex(By locator, WaitStrategy waitStrategy, int index) {
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
-		new Select(element).selectByIndex(index);
-	}
+    /** Select dropdown option by index position */
+    protected void selectDropdownByIndex(By locator, WaitStrategy waitStrategy, int index) {
+        new Select(ExplicitWaitFactory.performExplicitWait(waitStrategy, locator)).selectByIndex(index);
+    }
 
-	/**
-	 * Scrolls to the element to bring it into view.
-	 */
-	protected void scrollToElement(By locator, WaitStrategy waitStrategy) {
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
-		Actions actions = new Actions(DriverManager.getDriver());
-		actions.moveToElement(element).perform();
-	}
+    /** Scrolls to an element (brings into view) */
+    protected void scrollToElement(By locator, WaitStrategy waitStrategy) {
+        WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
+        new Actions(DriverManager.getDriver()).moveToElement(element).perform();
+    }
 
-	/**
-	 * Performs click using Actions class, useful for dynamic or JS-heavy elements.
-	 */
-	protected void actionClick(By locator, WaitStrategy waitStrategy) {
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
-		Actions actions = new Actions(DriverManager.getDriver());
-		actions.moveToElement(element).click().perform();
-	}
+    /** Click using Actions class (useful for tricky JS elements) */
+    protected void actionClick(By locator, WaitStrategy waitStrategy) {
+        WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, locator);
+        new Actions(DriverManager.getDriver()).moveToElement(element).click().perform();
+    }
 
-	/**
-	 * Returns a single WebElement directly without applying wait.
-	 */
-	protected WebElement getElement(By locator) {
-		return DriverManager.getDriver().findElement(locator);
-	}
+    /** Returns element without applying any wait */
+    protected WebElement getElement(By locator) {
+        return DriverManager.getDriver().findElement(locator);
+    }
 
-	/**
-	 * Returns a list of WebElements for a given locator.
-	 */
-	protected List<WebElement> getElements(By locator) {
-		return DriverManager.getDriver().findElements(locator);
-	}
+    /** Returns list of elements without explicit wait */
+    protected List<WebElement> getElements(By locator) {
+        return DriverManager.getDriver().findElements(locator);
+    }
 
-	/**
-	 * Selects a date from a calendar UI widget by matching the displayed month/year.
-	 * Continues clicking next arrow until expected month/year is found.
-	 */
-	protected void selectDateInCalendar(String expectedMonthYear, String expectedDay, By allMonthHeadersLocator,
-			By nextArrowLocator, String dayXpathTemplate) {
-		boolean dateSelected = false;
+    /**
+     * Picks a date from a calendar UI by matching month/year
+     * - Keeps clicking 'next' until desired month/year is visible
+     */
+    protected void selectDateInCalendar(String expectedMonthYear, String expectedDay,
+                                        By allMonthHeadersLocator, By nextArrowLocator,
+                                        String dayXpathTemplate) {
 
-		while (!dateSelected) {
-			List<WebElement> monthHeaders = DriverManager.getDriver().findElements(allMonthHeadersLocator);
+        boolean dateSelected = false;
 
-			for (WebElement monthHeader : monthHeaders) {
-				if (monthHeader.getText().equalsIgnoreCase(expectedMonthYear)) {
-					String finalDayXpath = String.format(dayXpathTemplate, expectedDay);
-					By dayLocator = By.xpath(finalDayXpath);
-					click(dayLocator, WaitStrategy.CLICKABLE);
-					dateSelected = true;
-					break;
-				}
-			}
+        // Loop until the target date is selected
+        while (!dateSelected) {
+            List<WebElement> monthHeaders = DriverManager.getDriver().findElements(allMonthHeadersLocator);
 
-			if (!dateSelected) {
-				click(nextArrowLocator, WaitStrategy.CLICKABLE);
-			}
-		}
-	}
+            for (WebElement monthHeader : monthHeaders) {
+                if (monthHeader.getText().equalsIgnoreCase(expectedMonthYear)) {
+                    // Build dynamic day XPath and click
+                    String finalDayXpath = String.format(dayXpathTemplate, expectedDay);
+                    click(By.xpath(finalDayXpath), WaitStrategy.CLICKABLE);
+                    dateSelected = true;
+                    break;
+                }
+            }
+
+            // If month not found, click next arrow
+            if (!dateSelected) {
+                click(nextArrowLocator, WaitStrategy.CLICKABLE);
+            }
+        }
+    }
 }

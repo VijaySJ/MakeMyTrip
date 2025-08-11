@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="MakeMyTrip_BusBooking_Suite" parallel="false">
 
-	<parameter name="browser" value="chrome" />
+    <!-- Global suite-level parameter for browser type -->
+    <parameter name="browser" value="chrome" />
 
-	<listeners>
-		<listener class-name="listeners.TestListener" />
-	</listeners>
+    <!-- Registered listeners for the suite -->
+    <listeners>
+        <listener class-name="listeners.TestListener" />
+    </listeners>
 
-	<test name="Bus Booking Tests">
-		<classes>
-			<class name="tests.BusBookingTest" />
-		</classes>
-	</test>
+    <!-- Single test block -->
+    <test name="Bus Booking Flow" preserve-order="true" parallel="false">
+        <classes>
+            <!-- Our Bus booking test -->
+            <class name="tests.BusBookingTest" />
+        </classes>
+    </test>
 </suite>

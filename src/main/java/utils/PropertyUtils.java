@@ -10,46 +10,39 @@ import java.util.Properties;
 import constants.FrameworkConstants;
 
 /**
- * Utility class to read configuration properties from the config.properties file.
- * Loads properties once into a Map for fast access across the framework.
+ * Utility class to read configuration from config.properties.
+ * Loads properties once for fast access throughout the framework.
  */
 public final class PropertyUtils {
 
-    // Private constructor to prevent instantiation
+    // Prevents instantiation
     private PropertyUtils() {}
 
-    // Java Properties object to load key-value pairs
+    // Used to load properties from file
     private static final Properties property = new Properties();
 
-    // Config map to store properties for quick access
+    // Stores all config properties for O(1) lookup
     private static final Map<String, String> CONFIGMAP = new HashMap<>();
 
-    // Static block to load the config file when the class is loaded
+    // Static initializer loads the config file once when class loads
     static {
         try (FileInputStream fis = new FileInputStream(FrameworkConstants.getConfigFilePath())) {
-            // Load properties from file
-            property.load(fis);
-
-            // Transfer properties from java.util.Properties to HashMap for faster lookup
+            property.load(fis); // Load from file into Properties
+            // Move each property to a HashMap for quick repeated access
             property.entrySet().forEach(entry ->
                 CONFIGMAP.put(String.valueOf(entry.getKey()), String.valueOf(entry.getValue()))
             );
-
         } catch (IOException e) {
-            // If file is not found or cannot be read, throw a RuntimeException to fail fast
+            // Fail fast if config file is missing or unreadable
             throw new RuntimeException("Failed to load properties file.", e);
         }
     }
 
     /**
-     * Retrieves the value of a given property key from the config map.
-     *
-     * @param key the property key to lookup
-     * @return the value associated with the key
-     * @throws RuntimeException if the key is null, missing, or empty
+     * Gets the value for a property key.
+     * Throws if key is missing/null/empty for reliable test behavior.
      */
     public static String get(String key) {
-        // Validate the key and value existence before returning
         if (Objects.isNull(key) || Objects.isNull(CONFIGMAP.get(key)) || CONFIGMAP.get(key).isEmpty()) {
             throw new RuntimeException("Property key '" + key + "' not found in config.properties");
         }
