@@ -27,6 +27,7 @@ public class BusResultsPage extends BasePage {
         return getText(BUS_TITLE_HEADING, WaitStrategy.VISIBLE);
     }
     
+    /** Gets and returns bus count text from results page */
     public String getBusesCountText() {
     	return getText(BUSES_COUNT, WaitStrategy.VISIBLE);
     }

@@ -26,7 +26,7 @@ public final class FrameworkConstants {
     /** Default wait time (in seconds) for WebDriver explicit waits */
     private static final int EXPLICIT_WAIT = 20;
 
-    // Returns path to the config file
+    // Returns path to the configuration file
     public static String getConfigFilePath() {
         return CONFIGFILE_PATH;
     }

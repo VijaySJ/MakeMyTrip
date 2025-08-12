@@ -5,7 +5,7 @@
     <parameter name="browser" value="chrome" />
 
     <!-- Registered listeners for the suite -->
-    <listeners>
+    <listeners> 
         <listener class-name="listeners.TestListener" />
     </listeners>
 
